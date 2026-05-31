@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Lớp Học</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand" id="navBrand">🎓 Lớp Học</div>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showPage('home')">Trang chủ</button>
+    <button class="nav-link" onclick="showPage('albums')">Album ảnh</button>
+    <button class="nav-link" onclick="showPage('members')">Thành viên</button>
+    <button class="nav-link" onclick="showPage('timeline')">Timeline</button>
+  </div>
+  <button class="btn-admin" id="adminBtn" onclick="showPage('admin')">⚙ Quản trị</button>
+</nav>
+
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-bg-img" id="heroBgImg"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow" id="heroSchool">Trường THPT ...</div>
+      <h1 class="hero-title" id="heroTitle">Lớp 12A1</h1>
+      <p class="hero-subtitle">Những kỷ niệm đẹp sẽ mãi trong tim chúng ta 💛</p>
+      <p class="hero-desc" id="heroDesc"></p>
+      <div class="countdown-box">
+        <div class="countdown-item"><div class="countdown-num" id="cdDays">--</div><div class="countdown-label">Ngày</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item"><div class="countdown-num" id="cdHours">--</div><div class="countdown-label">Giờ</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item"><div class="countdown-num" id="cdMins">--</div><div class="countdown-label">Phút</div></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-item"><div class="countdown-num" id="cdSecs">--</div><div class="countdown-label">Giây</div></div>
+      </div>
+      <div style="font-size:0.75rem;opacity:0.6;margin-top:10px" id="countdownLabel">đến ngày tốt nghiệp</div>
+    </div>
+    <div class="scroll-indicator">▼ Cuộn xuống</div>
+  </div>
+  <div class="upcoming-strip" id="upcomingStrip" style="display:none">
+    <div class="upcoming-label">Sắp tới</div>
+    <div id="upcomingItems" style="display:flex;gap:24px"></div>
+  </div>
+  <div class="section">
+    <p class="section-title">Video nhìn lại 3 năm học</p>
+    <div class="divider"></div>
+    <div class="year-videos-grid" id="yearVideosGrid">
+      <div class="year-video-card">
+        <div class="year-video-label">📚 Năm học 10</div>
+        <div class="year-video-wrap" id="yvWrap10">
+          <div class="year-video-placeholder"><div style="font-size:2.5rem">🎬</div><p>Chưa có video năm 10</p><p style="font-size:0.75rem;opacity:0.7">Thêm từ trang Quản trị</p></div>
+        </div>
+      </div>
+      <div class="year-video-card">
+        <div class="year-video-label">📖 Năm học 11</div>
+        <div class="year-video-wrap" id="yvWrap11">
+          <div class="year-video-placeholder"><div style="font-size:2.5rem">🎬</div><p>Chưa có video năm 11</p><p style="font-size:0.75rem;opacity:0.7">Thêm từ trang Quản trị</p></div>
+        </div>
+      </div>
+      <div class="year-video-card">
+        <div class="year-video-label">🎓 Năm học 12</div>
+        <div class="year-video-wrap" id="yvWrap12">
+          <div class="year-video-placeholder"><div style="font-size:2.5rem">🎬</div><p>Chưa có video năm 12</p><p style="font-size:0.75rem;opacity:0.7">Thêm từ trang Quản trị</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-albums">
+  <div class="section">
+    <p class="section-title">Album ảnh kỷ niệm</p>
+    <div class="divider"></div>
+    <!-- Timeline 3 năm học -->
+    <div class="year-timeline-wrap">
+      <div class="year-timeline-line"></div>
+      <div class="year-timeline-nodes">
+        <div class="year-node" onclick="filterAlbumYear('10')">
+          <div class="year-node-circle" id="yn10">📚</div>
+          <div class="year-node-label">Năm 10</div>
+        </div>
+        <div class="year-node" onclick="filterAlbumYear('11')">
+          <div class="year-node-circle" id="yn11">📖</div>
+          <div class="year-node-label">Năm 11</div>
+        </div>
+        <div class="year-node" onclick="filterAlbumYear('12')">
+          <div class="year-node-circle" id="yn12">🎓</div>
+          <div class="year-node-label">Năm 12</div>
+        </div>
+      </div>
+      <div class="year-filter-label" id="yearFilterLabel">Tất cả năm học</div>
+      <button class="btn btn-secondary btn-sm" id="clearYearFilter" onclick="filterAlbumYear(null)" style="display:none;margin:0 auto;display:none">✕ Xem tất cả</button>
+    </div>
+    <div class="albums-grid" id="albumsGrid">
+      <div class="empty-state" style="grid-column:1/-1"><div class="icon">🖼</div><p>Chưa có album nào.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-members">
+  <div class="section">
+    <p class="section-title">Thành viên lớp</p>
+    <div class="divider"></div>
+    <div class="members-search-bar" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <input class="search-input" id="memberSearch" placeholder="🔍 Tìm kiếm tên..." oninput="filterMembers()" style="flex:1;min-width:180px">
+      <select class="form-select" id="memberToFilter" onchange="filterMembers()" style="width:auto;padding:10px 14px;border-radius:12px;border:1.5px solid var(--gold-light);background:var(--cream);font-family:inherit;font-size:0.9rem">
+        <option value="">Tất cả tổ</option>
+        <option value="1">Tổ 1</option>
+        <option value="2">Tổ 2</option>
+        <option value="3">Tổ 3</option>
+        <option value="4">Tổ 4</option>
+      </select>
+      <button class="btn btn-primary btn-sm" onclick="showAttendanceModal()" style="white-space:nowrap">📋 Điểm danh</button>
+    </div>
+    <div class="members-grid" id="membersGrid">
+      <div class="empty-state" style="grid-column:1/-1"><div class="icon">👥</div><p>Chưa có thành viên nào.</p></div>
+    </div>
+    <div id="birthdaySection" style="margin-top:60px;display:none">
+      <p class="section-title" style="font-size:1.5rem">🎂 Sinh nhật tháng này</p>
+      <div class="divider"></div>
+      <div class="members-grid" id="birthdayGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Điểm danh -->
+<div class="overlay" id="attendanceOverlay">
+  <div class="overlay-content" style="max-width:700px">
+    <button class="overlay-close" onclick="closeAttendance()">✕</button>
+    <div id="attendanceContent"></div>
+  </div>
+</div>
+
+<div class="page" id="page-timeline">
+  <div class="section">
+    <p class="section-title">Timeline kỷ niệm</p>
+    <div class="divider"></div>
+    <div class="timeline" id="timelineList">
+      <div class="empty-state"><div class="icon">📅</div><p>Chưa có sự kiện nào.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-admin">
+  <div class="admin-login" id="adminLoginBox">
+    <div style="font-size:3rem;margin-bottom:16px">🔐</div>
+    <h2>Quản trị viên</h2>
+    <p style="color:var(--text-muted);font-size:0.875rem;margin-bottom:24px">Nhập mật khẩu để truy cập</p>
+    <div class="form-group">
+      <input class="form-input" type="password" id="adminPwInput" placeholder="Mật khẩu..." onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="btn btn-primary" style="width:100%" onclick="doLogin()">Đăng nhập</button>
+  </div>
+  <div class="admin-panel" id="adminPanelBox" style="display:none">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+      <h1 style="font-family:'Playfair Display',serif;color:var(--brown)">⚙ Quản trị</h1>
+      <button class="btn btn-secondary btn-sm" onclick="adminLogout()">Đăng xuất</button>
+    </div>
+    <div class="admin-tabs">
+      <button class="tab-btn active" onclick="switchTab('tab-settings',this)">⚙ Cài đặt</button>
+      <button class="tab-btn" onclick="switchTab('tab-posts',this)">📝 Bài viết</button>
+      <button class="tab-btn" onclick="switchTab('tab-albums',this)">🖼 Album ảnh</button>
+      <button class="tab-btn" onclick="switchTab('tab-members',this)">👥 Thành viên</button>
+      <button class="tab-btn" onclick="switchTab('tab-timeline',this)">📅 Timeline</button>
+    </div>
+
+    <div class="admin-section active" id="tab-settings">
+      <div class="admin-card">
+        <h3>Thông tin lớp học</h3>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Tên lớp</label><input class="form-input" id="s-className" placeholder="VD: 12A1"></div>
+          <div class="form-group"><label class="form-label">Trường</label><input class="form-input" id="s-school" placeholder="VD: THPT Nguyễn Huệ"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Mô tả lớp</label><textarea class="form-textarea" id="s-description" rows="3"></textarea></div>
+        <div class="form-group"><label class="form-label">Ngày tốt nghiệp (đếm ngược)</label><input class="form-input" id="s-gradDate" type="date"></div>
+        <div class="form-group"><label class="form-label">Đổi mật khẩu quản trị</label><input class="form-input" id="s-password" type="password" placeholder="Để trống nếu không đổi"></div>
+        <button class="btn btn-primary" onclick="saveSettings()">💾 Lưu cài đặt</button>
+      </div>
+      <div class="admin-card">
+        <h3>Ảnh bìa & Ảnh tập thể</h3>
+        <div class="form-row">
+          <div>
+            <p class="form-label" style="margin-bottom:12px">Ảnh bìa (hero background)</p>
+            <div class="upload-zone" onclick="document.getElementById('uploadCover').click()">📷 Click để chọn ảnh bìa</div>
+            <input type="file" id="uploadCover" accept="image/*" style="display:none" onchange="uploadCover(this)">
+          </div>
+          <div>
+            <p class="form-label" style="margin-bottom:12px">Ảnh tập thể lớp</p>
+            <div class="upload-zone" onclick="document.getElementById('uploadGroup').click()">📸 Click để chọn ảnh tập thể</div>
+            <input type="file" id="uploadGroup" accept="image/*" style="display:none" onchange="uploadGroup(this)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-section" id="tab-posts">
+      <div class="admin-card">
+        <h3>Thêm bài viết mới</h3>
+        <div class="form-group"><label class="form-label">Tiêu đề</label><input class="form-input" id="p-title" placeholder="Tiêu đề bài viết..."></div>
+        <div class="form-group"><label class="form-label">Nội dung</label><textarea class="form-textarea" id="p-content" rows="5" placeholder="Nội dung bài viết..."></textarea></div>
+        <div class="form-group"><label class="form-label">Ảnh đính kèm</label><input type="file" class="form-input" id="p-images" accept="image/*" multiple></div>
+        <div class="form-group" style="display:flex;align-items:center;gap:8px">
+          <input type="checkbox" id="p-pinned" style="width:auto">
+          <label class="form-label" style="margin:0;cursor:pointer" for="p-pinned">📌 Ghim bài viết lên đầu</label>
+        </div>
+        <button class="btn btn-primary" onclick="addPost()">➕ Đăng bài viết</button>
+      </div>
+      <div class="admin-card"><h3>Danh sách bài viết</h3><div id="adminPostsList"></div></div>
+    </div>
+
+    <div class="admin-section" id="tab-albums">
+      <div class="admin-card">
+        <h3>Tạo album mới</h3>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Tên album</label><input class="form-input" id="a-name" placeholder="VD: Chuyến tham quan Hà Nội"></div>
+          <div class="form-group"><label class="form-label">Năm học</label>
+            <select class="form-select" id="a-year">
+              <option value="">— Chọn năm —</option>
+              <option value="10">Năm 10</option>
+              <option value="11">Năm 11</option>
+              <option value="12">Năm 12</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label class="form-label">Sự kiện / Mốc thời gian</label><input class="form-input" id="a-event" placeholder="VD: Khai giảng, Trại hè, Tổng kết..."></div>
+        <div class="form-group"><label class="form-label">Mô tả</label><textarea class="form-textarea" id="a-desc" rows="2"></textarea></div>
+        <button class="btn btn-primary" onclick="addAlbum()">➕ Tạo album</button>
+      </div>
+      <div class="admin-card"><h3>Quản lý album</h3><div id="adminAlbumsList"></div></div>
+    </div>
+
+    <div class="admin-section" id="tab-members">
+      <div class="admin-card">
+        <h3>Thêm thành viên</h3>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Họ và tên *</label><input class="form-input" id="m-name" placeholder="Nguyễn Văn A"></div>
+          <div class="form-group"><label class="form-label">Vai trò</label>
+            <select class="form-select" id="m-role">
+              <option value="">Học sinh</option>
+              <option value="Lớp trưởng">Lớp trưởng</option>
+              <option value="Lớp phó">Lớp phó</option>
+              <option value="Bí thư">Bí thư</option>
+              <option value="GVCN">Giáo viên CN</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Ngày sinh</label><input class="form-input" id="m-birthday" type="date"></div>
+          <div class="form-group"><label class="form-label">Số điện thoại</label><input class="form-input" id="m-phone" placeholder="0xxx..."></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Tổ</label>
+            <select class="form-select" id="m-to">
+              <option value="">— Chọn tổ —</option>
+              <option value="1">Tổ 1</option>
+              <option value="2">Tổ 2</option>
+              <option value="3">Tổ 3</option>
+              <option value="4">Tổ 4</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Mạng xã hội (link)</label><input class="form-input" id="m-social" placeholder="https://facebook.com/..."></div>
+        </div>
+        <div class="form-group"><label class="form-label">Ghi chú / Nickname</label><input class="form-input" id="m-note" placeholder="Biệt danh hoặc ghi chú vui..."></div>
+        <button class="btn btn-primary" onclick="addMember()">➕ Thêm thành viên</button>
+      </div>
+      <div class="admin-card">
+        <h3>Danh sách thành viên</h3>
+        <table class="data-table">
+          <thead><tr><th>Họ tên</th><th>SĐT</th><th>Tổ</th><th>Sinh nhật</th><th>Vai trò</th><th>Thao tác</th></tr></thead>
+          <tbody id="adminMembersTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="admin-section" id="tab-timeline">
+      <div class="admin-card">
+        <h3>🎬 Video nhìn lại 3 năm học</h3>
+        <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:16px">Mỗi năm học một video YouTube — hiển thị ở Trang chủ</p>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">📚 Video năm 10 (YouTube URL)</label><input class="form-input" id="v-year10" placeholder="https://youtube.com/watch?v=..."></div>
+          <div class="form-group"><label class="form-label">Tiêu đề video năm 10</label><input class="form-input" id="v-year10-title" placeholder="Hành trình năm 10..."></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">📖 Video năm 11 (YouTube URL)</label><input class="form-input" id="v-year11" placeholder="https://youtube.com/watch?v=..."></div>
+          <div class="form-group"><label class="form-label">Tiêu đề video năm 11</label><input class="form-input" id="v-year11-title" placeholder="Ký ức năm 11..."></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">🎓 Video năm 12 (YouTube URL)</label><input class="form-input" id="v-year12" placeholder="https://youtube.com/watch?v=..."></div>
+          <div class="form-group"><label class="form-label">Tiêu đề video năm 12</label><input class="form-input" id="v-year12-title" placeholder="Ngày cuối bên nhau..."></div>
+        </div>
+        <button class="btn btn-primary" onclick="saveYearVideos()">💾 Lưu video 3 năm</button>
+      </div>
+      <div class="admin-card">
+        <h3>Thêm sự kiện</h3>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Tên sự kiện *</label><input class="form-input" id="e-title" placeholder="VD: Chuyến tham quan Đà Nẵng"></div>
+          <div class="form-group"><label class="form-label">Ngày diễn ra *</label><input class="form-input" id="e-date" type="date"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Loại sự kiện</label>
+            <select class="form-select" id="e-type">
+              <option value="other">🌟 Khác</option>
+              <option value="trip">✈ Tham quan / Dã ngoại</option>
+              <option value="art">🎭 Văn nghệ / Sự kiện</option>
+              <option value="grad">🎓 Tốt nghiệp</option>
+              <option value="sport">⚽ Thể thao</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Ảnh minh họa (URL)</label><input class="form-input" id="e-img" placeholder="URL ảnh..."></div>
+        </div>
+        <div class="form-group"><label class="form-label">Mô tả</label><textarea class="form-textarea" id="e-desc" rows="3" placeholder="Kể về sự kiện này..."></textarea></div>
+        <button class="btn btn-primary" onclick="addEvent()">➕ Thêm sự kiện</button>
+      </div>
+      <div class="admin-card"><h3>Danh sách sự kiện</h3><div id="adminEventsList"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="albumOverlay">
+  <div class="overlay-content">
+    <button class="overlay-close" onclick="closeAlbum()">✕</button>
+    <div id="albumOverlayContent"></div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">‹</button>
+  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">›</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="main.js"></script>
+</body>
+</html>
